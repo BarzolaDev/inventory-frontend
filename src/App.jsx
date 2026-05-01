@@ -1,9 +1,13 @@
+import { useState } from 'react'
 import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
 
 export default function App() {
-  return (
-    <div className="bg-gray-950 min-h-screen">
-      <Login/>
-    </div>
-  )
+  const [token, setToken] = useState(null)
+
+  if (!token) {
+    return <Login onLogin={setToken} />
+  }
+
+  return <Dashboard token={token} />
 }

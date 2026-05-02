@@ -5,8 +5,8 @@ function Dashboard({ token }) {
     const [products, setProducts] = useState([])
 
     useEffect(()=>{
-        getProducts(token).then(setProducts)
-    }, [token])
+        getProducts().then(setProducts)
+    }, [])
 
     return (
         <div className="bg-gray-950 min-h-screen text-white p-8">

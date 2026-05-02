@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL
+import { API_URL } from './api'
 
 export async function login(email, password) {
 
@@ -6,14 +6,14 @@ export async function login(email, password) {
     formData.append('username', email)
     formData.append('password', password)
 
-    const res = await fetch(`${API_URL}/users/login`, {
+    const response = await fetch(`${API_URL}/users/login`, {
         method: 'POST',
         headers: { 'Content-Type' : 'application/x-www-form-urlencoded'},
         body: formData
     })
 
-    if (!res.ok) throw new Error('Credenciales inválidas')
-    return res.json()        
+    if (!response.ok) throw new Error('Credenciales inválidas')
+    return response.json()        
 }
 
 

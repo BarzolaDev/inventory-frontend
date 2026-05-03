@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
-import { login } from "../services/api"
+import { register } from "../services/api"
 
-function Login() {
+function Register() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
@@ -12,19 +12,18 @@ function Login() {
     e.preventDefault()
     setError("")
 
-    const data = await login(email, password)
+    const data = await register(email, password)
 
-    if (data.access_token) {
-      localStorage.setItem("token", data.access_token)
-      navigate("/products")
+    if (data.id) {
+      navigate("/login")
     } else {
-      setError("Email o contraseña incorrectos")
+      setError("Error al registrarse, intentá de nuevo")
     }
   }
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Registro</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -39,11 +38,11 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
         {error && <p>{error}</p>}
-        <button type="submit">Entrar</button>
+        <button type="submit">Registrarse</button>
       </form>
-      <Link to="/register">¿No tenés cuenta? Registrate</Link>
+      <Link to="/login">¿Ya tenés cuenta? Iniciá sesión</Link>
     </div>
   )
 }
 
-export default Login
+export default Register

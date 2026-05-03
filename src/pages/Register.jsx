@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom"
 import { register } from "../services/api"
 
 function Register() {
+  const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
@@ -12,7 +13,7 @@ function Register() {
     e.preventDefault()
     setError("")
 
-    const data = await register(email, password)
+    const data = await register(username, email, password)
 
     if (data.id) {
       navigate("/login")
@@ -25,6 +26,12 @@ function Register() {
     <div>
       <h1>Registro</h1>
       <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Usuario"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
         <input
           type="email"
           placeholder="Email"

@@ -15,11 +15,11 @@ export const login = (email, password) =>
     body: new URLSearchParams({ username: email, password })
   }).then(res => res.json())
 
-export const register = (email, password) =>
+export const register = (username, email, password) =>
   fetch(`${API_URL}/users/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
+    body: JSON.stringify({ username, email, password })
   }).then(res => res.json())
 
 // PRODUCTS

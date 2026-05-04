@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { motion } from "framer-motion"
+import ParticlesBackground from "../components/ParticlesBackground"
 import Particles from "react-tsparticles"
 import { loadSlim } from "tsparticles-slim"
 import { register } from "../services/api"
@@ -29,25 +30,7 @@ function Register() {
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center relative">
-      <Particles
-        init={particlesInit}
-        options={{
-          background: { color: { value: "#000000" } },
-          particles: {
-            number: { value: 80 },
-            color: { value: "#00ff00" },
-            opacity: { value: 0.5 },
-            size: { value: 3 },
-            move: { enable: true, speed: 1 },
-            links: {
-              enable: true,
-              color: "#00ff00",
-              opacity: 0.2
-            }
-          }
-        }}
-        className="absolute inset-0"
-      />
+      <ParticlesBackground />
 
       <motion.div
         initial={{ opacity: 0, y: 60 }}

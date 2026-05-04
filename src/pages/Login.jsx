@@ -1,8 +1,7 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { motion } from "framer-motion"
-import Particles from "react-tsparticles"
-import { loadSlim } from "tsparticles-slim"
+import ParticlesBackground from "../components/ParticlesBackground"
 import { login } from "../services/api"
 
 function TypingText({ text }) {
@@ -31,10 +30,6 @@ function Login() {
   const [error, setError] = useState("")
   const navigate = useNavigate()
 
-  const particlesInit = useCallback(async (engine) => {
-    await loadSlim(engine)
-  }, [])
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError("")
@@ -49,25 +44,7 @@ function Login() {
 
   return (
      <div className="min-h-screen bg-black flex flex-col items-center justify-center relative">
-      <Particles
-        init={particlesInit}
-        options={{
-          background: { color: { value: "#000000" } },
-          particles: {
-            number: { value: 80 },
-            color: { value: "#00ff00" },
-            opacity: { value: 0.5 },
-            size: { value: 3 },
-            move: { enable: true, speed: 1 },
-            links: {
-              enable: true,
-              color: "#00ff00",
-              opacity: 0.2
-            }
-          }
-        }}
-        className="absolute inset-0"
-      />
+     <ParticlesBackground />
 
       <TypingText text="THE FUTURE IS NOW FKN OLD MAN" />
 

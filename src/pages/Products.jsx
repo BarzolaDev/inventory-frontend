@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { getProducts, deleteProduct } from "../services/api"
+import ParticlesBackground from "../components/ParticlesBackground"
 
 function Products() {
   const [products, setProducts] = useState([])
@@ -33,18 +34,19 @@ function Products() {
     navigate("/login")
   }
 
-  if (loading) return <p className="text-center mt-10 text-gray-400">Cargando...</p>
+  if (loading) return <p className="text-center mt-10 text-green-400 font-mono">Cargando...</p>
   if (error) return <p className="text-center mt-10 text-red-400">{error}</p>
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="min-h-screen bg-black relative">
+      <ParticlesBackground />
+      <div className="relative z-10 max-w-4xl mx-auto px-4 py-8">
 
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">Productos</h1>
+          <h1 className="text-2xl font-bold text-green-400 font-mono">Productos</h1>
           <button
             onClick={handleLogout}
-            className="text-sm text-gray-400 hover:text-red-400 transition"
+            className="text-sm text-green-800 hover:text-red-400 transition cursor-pointer font-mono"
           >
             Cerrar sesión
           </button>
@@ -52,34 +54,34 @@ function Products() {
 
         <Link
           to="/products/new"
-          className="inline-block mb-6 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg transition"
+          className="inline-block mb-6 border border-green-500 text-green-400 hover:bg-green-500 hover:text-black text-sm font-mono font-medium px-4 py-2.5 rounded-lg transition"
         >
           + Crear producto
         </Link>
 
         {products.length === 0 ? (
-          <p className="text-gray-400 text-sm">No hay productos</p>
+          <p className="text-green-800 text-sm font-mono">No hay productos</p>
         ) : (
           <div className="flex flex-col gap-3">
             {products.map((product) => (
               <div
                 key={product.id}
-                className="bg-white rounded-xl shadow-sm px-5 py-4 flex items-center justify-between"
+                className="bg-black border border-green-900 hover:border-green-500 rounded-xl px-5 py-4 flex items-center justify-between transition"
               >
                 <div>
                   <Link
                     to={`/products/${product.id}`}
-                    className="font-medium text-gray-800 hover:text-blue-500 transition"
+                    className="font-medium text-green-400 hover:text-green-300 font-mono transition"
                   >
                     {product.name}
                   </Link>
-                  <p className="text-sm text-gray-400">Stock: {product.stock} {product.unit}</p>
+                  <p className="text-sm text-green-800 font-mono">Stock: {product.stock} {product.unit}</p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <span className="text-sm font-medium text-gray-700">${product.sale_price}</span>
+                  <span className="text-sm font-mono text-green-400">${product.sale_price}</span>
                   <button
                     onClick={() => handleDelete(product.id)}
-                    className="text-sm text-red-400 hover:text-red-600 transition"
+                    className="text-sm text-red-500 hover:text-red-400 transition cursor-pointer font-mono"
                   >
                     Eliminar
                   </button>
